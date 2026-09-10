@@ -8,6 +8,17 @@ export async function proxy(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const authenticated = await verifySessionToken(token);
 
+  if (
+    !pathname.startsWith("/api/") &&
+    request.method !== "GET" &&
+    request.method !== "HEAD"
+  ) {
+    return new NextResponse(null, {
+      status: 405,
+      headers: { Allow: "GET, HEAD" },
+    });
+  }
+
   if (pathname === "/login" && authenticated) {
     return NextResponse.redirect(new URL("/", request.url));
   }
