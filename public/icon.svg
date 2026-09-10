@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mi Cartera">
+  <rect width="64" height="64" rx="18" fill="#173c35"/>
+  <path d="M17 23.5c0-3 2.5-5.5 5.5-5.5H45v8H22.5a5.5 5.5 0 0 1-5.5-2.5Z" fill="#e9c46a"/>
+  <path d="M17 23.5h30v23H22.5a5.5 5.5 0 0 1-5.5-5.5V23.5Z" fill="#fff"/>
+  <path d="M37 30h12v10H37a5 5 0 0 1 0-10Z" fill="#d36b4b"/>
+  <circle cx="38" cy="35" r="1.8" fill="#fff"/>
+</svg>
