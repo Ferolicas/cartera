@@ -385,6 +385,39 @@ select:focus-visible {
   backdrop-filter: blur(18px);
 }
 
+.section-nav {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(23, 60, 53, 0.07);
+  padding: 4px;
+  border-radius: 13px;
+  gap: 4px;
+}
+
+.section-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--muted);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.section-nav-link:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.section-nav-link.active {
+  color: var(--green);
+  background: var(--surface);
+  box-shadow: 0 2px 10px rgba(27, 46, 41, 0.09);
+}
+
 .header-actions,
 .today-label,
 .logout-button,
@@ -539,6 +572,15 @@ select:focus-visible {
 }
 
 .balance-card-top strong.negative { color: #ffc0ae; }
+.balance-card-top strong.positive { color: #8fe0c7; }
+.amount-positive { color: #8fe0c7 !important; }
+.amount-negative { color: #ffc0ae !important; }
+
+.daily-card {
+  background:
+    radial-gradient(circle at 10% 90%, rgba(45, 138, 112, 0.35), transparent 45%),
+    var(--green);
+}
 
 .balance-card-top p {
   max-width: 460px;

@@ -33,3 +33,25 @@ export const balanceSchema = z.object({
     .min(-MAX_AMOUNT_CENTS)
     .max(MAX_AMOUNT_CENTS),
 });
+
+export const bettingTransactionInputSchema = z.object({
+  description: z.string().trim().min(1).max(160),
+  amountCents: z.number().int().min(1).max(MAX_AMOUNT_CENTS),
+  type: z.enum(["income", "withdrawal"]),
+  dueDate: civilDate,
+  status: z.enum(["pending", "settled"]).default("pending"),
+});
+
+export const bettingTransactionPatchSchema = bettingTransactionInputSchema
+  .partial()
+  .refine((value) => Object.keys(value).length > 0, "No hay cambios");
+
+export const bettingTransactionQuerySchema = z.object({
+  period: z.enum(periods).default("month"),
+  date: civilDate,
+  type: z.enum(["all", "income", "withdrawal"]).default("all"),
+});
+
+export const bettingDashboardQuerySchema = z.object({
+  date: civilDate.optional(),
+});

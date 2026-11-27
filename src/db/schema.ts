@@ -16,6 +16,11 @@ export const transactionType = pgEnum("transaction_type", [
   "expense",
 ]);
 
+export const bettingTransactionType = pgEnum("betting_transaction_type", [
+  "income",
+  "withdrawal",
+]);
+
 export const transactionStatus = pgEnum("transaction_status", [
   "pending",
   "settled",
@@ -44,6 +49,29 @@ export const transactions = pgTable(
   ],
 );
 
+export const bettingTransactions = pgTable(
+  "betting_transactions",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    description: varchar("description", { length: 160 }).notNull(),
+    amountCents: integer("amount_cents").notNull(),
+    type: bettingTransactionType("type").notNull(),
+    dueDate: date("due_date", { mode: "string" }).notNull(),
+    status: transactionStatus("status").default("pending").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (table) => [
+    check("betting_transactions_amount_positive", sql`${table.amountCents} > 0`),
+    index("betting_transactions_due_date_idx").on(table.dueDate),
+    index("betting_transactions_type_status_idx").on(table.type, table.status),
+  ],
+);
+
 export const settings = pgTable(
   "settings",
   {
@@ -58,3 +86,4 @@ export const settings = pgTable(
 );
 
 export type Transaction = typeof transactions.$inferSelect;
+export type BettingTransaction = typeof bettingTransactions.$inferSelect;

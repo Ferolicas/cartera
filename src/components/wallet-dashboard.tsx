@@ -29,7 +29,9 @@ import {
   TrendingDown,
   TrendingUp,
   Wallet,
+  Dices,
 } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Brand } from "@/components/brand";
 import { MonthlyChart } from "@/components/monthly-chart";
@@ -323,6 +325,16 @@ export function WalletDashboard({ initialDate }: { initialDate: string }) {
     <div className="dashboard-page">
       <header className="dashboard-header">
         <Brand />
+
+        <nav className="section-nav" aria-label="Secciones">
+          <Link href="/" className="section-nav-link active">
+            <Wallet size={16} /> <span>Cartera</span>
+          </Link>
+          <Link href="/apuestas" className="section-nav-link">
+            <Dices size={16} /> <span>Apuestas</span>
+          </Link>
+        </nav>
+
         <div className="header-actions">
           <div className="today-label">
             <CalendarDays size={16} />
